@@ -4,10 +4,7 @@
 
 ##### 简介：
 
-YuraYura-Business-Service是Yura-Yura分离出来的部分，旨在为前端Vue-cli项目提供后台管理部分的接口服务
-
-![Snipaste_2019-12-25_10-22-31.png](https://i.loli.net/2020/04/27/TDYwVsvpH2oBRu8.png) 
-
+> YuraYura-Business-Service是Yura-Yura分离出来的部分，旨在为前端Vue-cli项目提供后台管理部分的接口服务
 
 ##### 后端：
 
