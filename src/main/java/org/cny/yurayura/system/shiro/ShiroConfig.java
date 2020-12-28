@@ -50,6 +50,7 @@ public class ShiroConfig {
         fillterMap.put("/sys/manager/getVerifyCode", "anon");
         fillterMap.put("/sys/manager/login", "anon");
         fillterMap.put("/sys/manager/logout", "anon");
+        fillterMap.put("/sys/manager/judgeAuthen", "anon");
         fillterMap.put("/sys/manager/**", "perms[sys]");
 
         filterFactoryBean.setFilterChainDefinitionMap(fillterMap);
