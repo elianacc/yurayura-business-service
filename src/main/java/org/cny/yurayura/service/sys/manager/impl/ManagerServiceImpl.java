@@ -29,7 +29,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 系统管理员 service impl
@@ -96,7 +98,7 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
         Object managerVerifyCode = httpSession.getAttribute("managerVerifyCode");
         // 验证码session失效
         if (StringUtils.isEmpty(managerVerifyCode)) {
-            return ApiResult.warn("验证码过期，请刷新验证码");
+            return ApiResult.warn("验证码过期，请重新输入");
         }
         if (managerVerifyCode.toString().equalsIgnoreCase(dto.getVerifyCode())) {
             // 封装用户登入数据(用户名+密码)为token
@@ -119,7 +121,10 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
                 cookie.setHttpOnly(true);
                 response.addCookie(cookie);
                 log.info("管理员：{}，登入成功", currentManger.getManagerName());
-                return ApiResult.success("管理员登入成功");
+                Map<String, Object> managerMsg = new HashMap<>();
+                managerMsg.put("managerName", currentManger.getManagerName());
+                managerMsg.put("managerPermission", currentManger.getManagerPermission());
+                return ApiResult.success("管理员登入成功", managerMsg);
             } catch (UnknownAccountException uae) {
                 return ApiResult.warn("用户不存在");
             } catch (IncorrectCredentialsException ice) {
