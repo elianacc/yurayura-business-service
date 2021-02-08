@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2020-03-24
  */
 @RestController
-@RequestMapping("/sys/dict")
+@RequestMapping("/api/sys/dict")
 @Api(tags = "系统数据字典API")
 public class DictController {
 

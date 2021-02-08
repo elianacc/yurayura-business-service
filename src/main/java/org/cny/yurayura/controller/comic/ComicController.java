@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2019-10-27
  */
 @RestController
-@RequestMapping("/comic")
+@RequestMapping("/api/comic")
 @Api(tags = "番剧API")
 public class ComicController {
 

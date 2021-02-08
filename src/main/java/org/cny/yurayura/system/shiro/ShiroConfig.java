@@ -1,6 +1,5 @@
 package org.cny.yurayura.system.shiro;
 
-import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,17 +40,17 @@ public class ShiroConfig {
          * */
         Map<String, String> fillterMap = new LinkedHashMap<>();
 
-        fillterMap.put("/comic/get*", "perms[select]");
-        fillterMap.put("/comic/insert*", "perms[insert]");
-        fillterMap.put("/comic/delete*", "perms[delete]");
-        fillterMap.put("/comic/update*", "perms[update]");
-        fillterMap.put("/sys/dict/getByDictCode", "perms[select]");
-        fillterMap.put("/sys/dict/**", "perms[sys]");
-        fillterMap.put("/sys/manager/getVerifyCode", "anon");
-        fillterMap.put("/sys/manager/login", "anon");
-        fillterMap.put("/sys/manager/logout", "anon");
-        fillterMap.put("/sys/manager/judgeAuthen", "anon");
-        fillterMap.put("/sys/manager/**", "perms[sys]");
+        fillterMap.put("/api/comic/get*", "perms[select]");
+        fillterMap.put("/api/comic/insert*", "perms[insert]");
+        fillterMap.put("/api/comic/delete*", "perms[delete]");
+        fillterMap.put("/api/comic/update*", "perms[update]");
+        fillterMap.put("/api/sys/dict/getByDictCode", "perms[select]");
+        fillterMap.put("/api/sys/dict/**", "perms[sys]");
+        fillterMap.put("/api/sys/manager/getVerifyCode", "anon");
+        fillterMap.put("/api/sys/manager/login", "anon");
+        fillterMap.put("/api/sys/manager/logout", "anon");
+        fillterMap.put("/api/sys/manager/judgeAuthen", "anon");
+        fillterMap.put("/api/sys/manager/**", "perms[sys]");
 
         filterFactoryBean.setFilterChainDefinitionMap(fillterMap);
 
@@ -81,17 +80,6 @@ public class ShiroConfig {
     @Bean
     public UserRealm userRealm() {
         return new UserRealm();
-    }
-
-    /**
-     * 创建ShiroDialect放入bean中（整合thymeleaf shiro）
-     *
-     * @param
-     * @return at.pollux.thymeleaf.shiro.dialect.ShiroDialect
-     */
-    @Bean
-    public ShiroDialect getShiroDialect() {
-        return new ShiroDialect();
     }
 
 }

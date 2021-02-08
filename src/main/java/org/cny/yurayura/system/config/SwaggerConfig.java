@@ -32,10 +32,10 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("org.cny.yurayura.controller"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(new ApiInfoBuilder()
-                        .title("Yura-Yura API")
-                        .description("Yura-Yura swagger在线api文档")
-                        .version("1.1.0-SNAPSHOT")
-                        .contact(new Contact("EliaNaCc", "https://github.com/elianacc/yurayura"
+                        .title("Yura-Yura-Servive API")
+                        .description("Yura-Yura-Servive swagger在线api文档")
+                        .version("1.0.1-SNAPSHOT")
+                        .contact(new Contact("EliaNaCc", "https://github.com/elianacc/yurayura-business-service"
                                 , "438507003@qq.com"))
                         .license("Apache License")
                         .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")

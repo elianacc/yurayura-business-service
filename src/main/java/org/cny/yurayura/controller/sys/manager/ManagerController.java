@@ -33,7 +33,7 @@ import java.util.List;
  * @since 2019-10-27
  */
 @RestController
-@RequestMapping("/sys/manager")
+@RequestMapping("/api/sys/manager")
 @Api(tags = "系统管理员API")
 public class ManagerController {
 
