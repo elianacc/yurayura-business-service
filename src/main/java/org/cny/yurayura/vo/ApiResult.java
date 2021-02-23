@@ -14,9 +14,9 @@ import lombok.Setter;
 public class ApiResult {
 
     private final static int SUCCESS_CODE = 200; // 服务器处理成功状态码
-    private final static int WARN_CODE = 100; // 服务器警告状态码
     private final static int FAIL_CODE = 500; // 服务器错误状态码
-    private final static int DONT_REPT_SUBMIT_CODE = 101; // 不允许重复提交状态码
+    private final static int WARN_CODE = 102; // 服务器警告状态码
+    private final static int DONT_REPT_SUBMIT_CODE = 103; // 不允许重复提交状态码
 
     private final static String DONT_REPT_SUBMIT_MSG = "请勿重复提交"; // 不允许重复提交提示信息
 
