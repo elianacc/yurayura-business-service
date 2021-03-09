@@ -90,6 +90,6 @@ public class ComicInstAndUpdtDto implements Serializable {
      * 图片文件
      */
     @ApiModelProperty(value = "图片文件")
-    private MultipartFile cmImgFile;
+    private MultipartFile comicImgFile;
 
 }

@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -57,11 +58,16 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
     @SneakyThrows
     @Override
     public ApiResult insert(ComicInstAndUpdtDto dto) {
-        // 更新状态为非完结，更新状态为更新时间
-        Integer comicStatus = dto.getComicStatus().intValue() == ComicStatusEnum.FINISHED.getStatusId() ? dto.getComicStatus() : dto.getComicUdTime();
+        Integer comicStatus;
+        // 更新状态为非完结，且更新时间不为空，更新状态为更新时间
+        if (dto.getComicStatus().intValue() == ComicStatusEnum.UPDATING.getStatusId() && !StringUtils.isEmpty(dto.getComicUdTime())) {
+            comicStatus = dto.getComicUdTime();
+        } else {
+            comicStatus = dto.getComicStatus();
+        }
 
         // 获取图片上传结果
-        String imgUplRes = FileUtil.imageUpload(dto.getCmImgFile());
+        String imgUplRes = FileUtil.imageUpload(dto.getComicImgFile());
 
         Comic comic = new Comic();
         ComicUserData comicUserData = new ComicUserData();
@@ -113,11 +119,16 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
     @SneakyThrows
     @Override
     public ApiResult update(ComicInstAndUpdtDto dto) {
-        // 更新状态为非完结，更新状态为更新时间
-        Integer comicStatus = dto.getComicStatus().intValue() == ComicStatusEnum.FINISHED.getStatusId() ? dto.getComicStatus() : dto.getComicUdTime();
+        Integer comicStatus;
+        // 更新状态为非完结，且更新时间不为空，更新状态为更新时间
+        if (dto.getComicStatus().intValue() == ComicStatusEnum.UPDATING.getStatusId() && !StringUtils.isEmpty(dto.getComicUdTime())) {
+            comicStatus = dto.getComicUdTime();
+        } else {
+            comicStatus = dto.getComicStatus();
+        }
 
         // 获取图片上传结果
-        String imgUplRes = FileUtil.imageUpload(dto.getCmImgFile());
+        String imgUplRes = FileUtil.imageUpload(dto.getComicImgFile());
 
         Comic comic = new Comic();
 
