@@ -1,6 +1,6 @@
 package org.cny.yurayura.system.mail;
 
-import org.cny.yurayura.dto.MailDto;
+import org.cny.yurayura.bo.MailBo;
 
 /**
  * 邮件 service
@@ -12,23 +12,23 @@ public interface MailService {
     /**
      * 发送纯文本邮件
      *
-     * @param dto
+     * @param bo
      */
-    public void sendTextMail(MailDto dto);
+    public void sendTextMail(MailBo bo);
 
     /**
      * 发送富文本（附件，图片，html等）邮件
      *
-     * @param dto
+     * @param bo
      * @param isShowHtml 是否解析html
      */
-    public void sendHtmlMail(MailDto dto, boolean isShowHtml);
+    public void sendHtmlMail(MailBo bo, boolean isShowHtml);
 
     /**
      * 发送模板邮件 使用thymeleaf模板
      *
-     * @param dto
+     * @param bo
      * @param templatePosition
      */
-    public void sendTemplateMail(MailDto dto, String templatePosition);
+    public void sendTemplateMail(MailBo bo, String templatePosition);
 }

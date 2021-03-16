@@ -1,7 +1,7 @@
 package org.cny.yurayura.system.mail;
 
 import lombok.extern.slf4j.Slf4j;
-import org.cny.yurayura.dto.MailDto;
+import org.cny.yurayura.bo.MailBo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -41,17 +41,17 @@ public class MailServiceImpl implements MailService {
     /**
      * 发送纯文本邮件
      *
-     * @param dto
+     * @param bo
      */
     @Async
     @Override
-    public void sendTextMail(MailDto dto) {
+    public void sendTextMail(MailBo bo) {
         // 建立邮件消息
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(sendEmail); // 发送人的邮箱
-        message.setSubject(dto.getTitle()); // 主题
-        message.setTo(dto.getReceiveEmail()); // 发给谁  对方邮箱
-        message.setText(dto.getContent()); // 内容
+        message.setSubject(bo.getTitle()); // 主题
+        message.setTo(bo.getReceiveEmail()); // 发给谁  对方邮箱
+        message.setText(bo.getContent()); // 内容
         try {
             // 发送
             javaMailSender.send(message);
@@ -63,23 +63,23 @@ public class MailServiceImpl implements MailService {
     /**
      * 发送富文本（附件，图片，html等）邮件
      *
-     * @param dto
+     * @param bo
      * @param isShowHtml 是否解析html
      */
     @Async
     @Override
-    public void sendHtmlMail(MailDto dto, boolean isShowHtml) {
+    public void sendHtmlMail(MailBo bo, boolean isShowHtml) {
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             // 是否发送的邮件是富文本（附件，图片，html等）
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
             messageHelper.setFrom(sendEmail);// 发送人的邮箱
-            messageHelper.setTo(dto.getReceiveEmail());// 发给谁  对方邮箱
-            messageHelper.setSubject(dto.getTitle());// 主题
-            messageHelper.setText(dto.getContent(), isShowHtml);// false，显示原始html代码，无效果
+            messageHelper.setTo(bo.getReceiveEmail());// 发给谁  对方邮箱
+            messageHelper.setSubject(bo.getTitle());// 主题
+            messageHelper.setText(bo.getContent(), isShowHtml);// false，显示原始html代码，无效果
             // 判断是否有附加图片等
-            if (dto.getAnnexOrData() != null && dto.getAnnexOrData().size() > 0) {
-                dto.getAnnexOrData().forEach((key, value) -> {
+            if (bo.getAnnexOrData() != null && bo.getAnnexOrData().size() > 0) {
+                bo.getAnnexOrData().forEach((key, value) -> {
                     try {
                         File file = new File(String.valueOf(value));
                         if (file.exists()) {
@@ -104,23 +104,23 @@ public class MailServiceImpl implements MailService {
      * configuration.setClassForTemplateLoading(this.getClass(), "/templates");
      * String emailContent = FreeMarkerTemplateUtils.processTemplateIntoString(configuration.getTemplate("mail.ftl"), params);
      *
-     * @param dto
+     * @param bo
      * @param templatePosition
      */
     @Async
     @Override
-    public void sendTemplateMail(MailDto dto, String templatePosition) {
+    public void sendTemplateMail(MailBo bo, String templatePosition) {
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
             messageHelper.setFrom(sendEmail);// 发送人的邮箱
-            messageHelper.setTo(dto.getReceiveEmail());// 发给谁  对方邮箱
-            messageHelper.setSubject(dto.getTitle()); // 主题
+            messageHelper.setTo(bo.getReceiveEmail());// 发给谁  对方邮箱
+            messageHelper.setSubject(bo.getTitle()); // 主题
             // 使用模板thymeleaf
             // Context是导这个包import org.thymeleaf.context.Context;
             Context context = new Context();
             // 定义模板数据
-            context.setVariables(dto.getAnnexOrData());
+            context.setVariables(bo.getAnnexOrData());
             // 获取thymeleaf的html模板
             String emailContent = templateEngine.process(templatePosition, context); // 指定模板路径
             messageHelper.setText(emailContent, true);

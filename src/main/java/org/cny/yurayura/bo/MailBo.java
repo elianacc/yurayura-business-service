@@ -1,4 +1,4 @@
-package org.cny.yurayura.dto;
+package org.cny.yurayura.bo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -19,7 +19,7 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "邮件参数dto")
-public class MailDto implements Serializable {
+public class MailBo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
