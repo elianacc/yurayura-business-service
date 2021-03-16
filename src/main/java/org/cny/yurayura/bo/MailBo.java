@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * 邮件参数 dto
+ * 邮件参数 bo
  *
  * @author CNY
  * @since 2019-11-25
@@ -18,7 +18,7 @@ import java.util.Map;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "邮件参数dto")
+@ApiModel(value = "邮件参数bo")
 public class MailBo implements Serializable {
 
     private static final long serialVersionUID = 1L;
