@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cny.yurayura.dao.sys.menu.MenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.cny.yurayura.entity.sys.menu.Menu">
+        <id column="id" property="id"/>
+        <result column="menu_title" property="menuTitle"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="menu_index" property="menuIndex"/>
+        <result column="menu_icon_class" property="menuIconClass"/>
+        <result column="menu_pid" property="menuPid"/>
+        <result column="menu_type" property="menuType"/>
+        <result column="menu_seq" property="menuSeq"/>
+    </resultMap>
+
+    <resultMap id="getListResultMap" type="org.cny.yurayura.bo.MenuBo">
+        <id column="id" property="id"/>
+        <result column="menu_title" property="menuTitle"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="menu_index" property="menuIndex"/>
+        <result column="menu_icon_class" property="menuIconClass"/>
+        <result column="menu_pid" property="menuPid"/>
+        <result column="menu_type" property="menuType"/>
+        <result column="menu_seq" property="menuSeq"/>
+        <collection property="menuSubList" ofType="org.cny.yurayura.entity.sys.menu.MenuSub">
+            <id column="submenu_id" property="id"/>
+            <result column="submenu_title" property="menuTitle"/>
+            <result column="submenu_name" property="menuName"/>
+            <result column="submenu_index" property="menuIndex"/>
+            <result column="submenu_icon_class" property="menuIconClass"/>
+            <result column="submenu_pid" property="menuPid"/>
+            <result column="submenu_type" property="menuType"/>
+            <result column="submenu_seq" property="menuSeq"/>
+        </collection>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, menu_title, menu_name, menu_index, menu_icon_class, menu_pid, menu_type, menu_seq
+    </sql>
+
+    <select id="getList" resultMap="getListResultMap">
+        SELECT
+            m.id,
+            m.menu_title,
+            m.menu_name,
+            m.menu_index,
+            m.menu_icon_class,
+            m.menu_pid,
+            m.menu_type,
+            m.menu_seq,
+            ms.id submenu_id,
+            ms.menu_title submenu_title,
+            ms.menu_name submenu_name,
+            ms.menu_index submenu_index,
+            ms.menu_icon_class submenu_icon_class,
+            ms.menu_pid submenu_pid,
+            ms.menu_type submenu_type,
+            ms.menu_seq submenu_seq
+        FROM
+            yurayura_sys_menu m
+                LEFT JOIN yurayura_sys_menu_sub ms ON m.id = ms.menu_pid
+        ORDER BY
+            m.menu_seq,
+            ms.menu_seq
+    </select>
+
+</mapper>
