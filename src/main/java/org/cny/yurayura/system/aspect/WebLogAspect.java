@@ -13,6 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * 使用AOP统一处理Web请求日志 aspect
@@ -40,7 +41,7 @@ public class WebLogAspect {
         startTime.set(System.currentTimeMillis());
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
+        HttpServletRequest request = Objects.requireNonNull(attributes).getRequest();
 
         // 记录请求内容
         log.info("========================================== Start ==========================================");

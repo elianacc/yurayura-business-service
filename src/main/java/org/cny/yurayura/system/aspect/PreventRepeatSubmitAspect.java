@@ -16,6 +16,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -39,8 +40,8 @@ public class PreventRepeatSubmitAspect {
     @Around("execution(public * *(..)) && @annotation(org.cny.yurayura.system.annotation.PreventRepeatSubmit)")
     public Object interceptor(ProceedingJoinPoint pjp) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        String sessionId = RequestContextHolder.getRequestAttributes().getSessionId();
-        HttpServletRequest request = attributes.getRequest();
+        String sessionId = Objects.requireNonNull(RequestContextHolder.getRequestAttributes()).getSessionId();
+        HttpServletRequest request = Objects.requireNonNull(attributes).getRequest();
         // 提交key为sessionId+url
         String key = sessionId + "-" + request.getServletPath();
         if (StringUtils.isEmpty(key)) {
