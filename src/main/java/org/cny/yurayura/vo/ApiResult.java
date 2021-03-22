@@ -17,8 +17,12 @@ public class ApiResult {
     private final static int FAIL_CODE = 500; // 服务器错误状态码
     private final static int WARN_CODE = 102; // 服务器警告状态码
     private final static int DONT_REPT_SUBMIT_CODE = 103; // 不允许重复提交状态码
+    private final static int NOT_AUTHENTICATION = 401; // 未认证
+    private final static int NOT_AUTHORIZATION = 405; // 未授权
 
     private final static String DONT_REPT_SUBMIT_MSG = "请勿重复提交"; // 不允许重复提交提示信息
+    private final static String NOT_AUTHENTICATION_MSG = "登入认证过期，请重新登入"; // 未认证提示信息
+    private final static String NOT_AUTHORIZATION_MSG = "还未授权此操作"; // 未授权提示信息
 
     // 状态码
     private Integer code;
@@ -78,6 +82,20 @@ public class ApiResult {
         ApiResult result = new ApiResult();
         result.setCode(DONT_REPT_SUBMIT_CODE);
         result.setMsg(DONT_REPT_SUBMIT_MSG);
+        return result;
+    }
+
+    public static ApiResult notAuthentication() {
+        ApiResult result = new ApiResult();
+        result.setCode(NOT_AUTHENTICATION);
+        result.setMsg(NOT_AUTHENTICATION_MSG);
+        return result;
+    }
+
+    public static ApiResult notAuthorization() {
+        ApiResult result = new ApiResult();
+        result.setCode(NOT_AUTHORIZATION);
+        result.setMsg(NOT_AUTHORIZATION_MSG);
         return result;
     }
 

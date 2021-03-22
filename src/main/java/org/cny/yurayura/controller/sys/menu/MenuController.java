@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.cny.yurayura.service.sys.menu.IMenuService;
 import org.cny.yurayura.vo.ApiResult;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * 系统菜单 controller
@@ -37,6 +38,18 @@ public class MenuController {
             return ApiResult.warn("id不能为空");
         }
         return ApiResult.success("查询成功", iMenuService.getById(id));
+    }
+
+    /**
+     * 查询系统菜单列表(侧边导航使用)
+     *
+     * @param
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    @PostMapping("/getSysMenu")
+    @ApiIgnore
+    public ApiResult getSysMenu() {
+        return iMenuService.getList();
     }
 
     /**

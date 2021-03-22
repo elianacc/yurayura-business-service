@@ -50,11 +50,15 @@ public class ShiroConfig {
         fillterMap.put("/api/sys/manager/login", "anon");
         fillterMap.put("/api/sys/manager/logout", "anon");
         fillterMap.put("/api/sys/manager/judgeAuthen", "anon");
+        fillterMap.put("/api/sys/manager/notAuthentication", "anon");
+        fillterMap.put("/api/sys/manager/notAuthorization", "anon");
         fillterMap.put("/api/sys/manager/**", "perms[sys]");
-        fillterMap.put("/api/sys/menu/getList", "perms[select]");
+        fillterMap.put("/api/sys/menu/getSysMenu", "perms[select]");
         fillterMap.put("/api/sys/menu/**", "perms[sys]");
 
         filterFactoryBean.setFilterChainDefinitionMap(fillterMap);
+        filterFactoryBean.setLoginUrl("/api/sys/manager/notAuthentication");
+        filterFactoryBean.setUnauthorizedUrl("/api/sys/manager/notAuthorization");
 
         return filterFactoryBean;
     }

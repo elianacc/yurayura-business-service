@@ -209,5 +209,28 @@ public class ManagerController {
         return ApiResult.success("管理员已登入");
     }
 
+    /**
+     * 未认证
+     *
+     * @param
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    @GetMapping("/notAuthentication")
+    @ApiIgnore
+    public ApiResult notAuthentication() {
+        return ApiResult.notAuthentication();
+    }
+
+    /**
+     * 未授权
+     *
+     * @param
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    @GetMapping("/notAuthorization")
+    @ApiIgnore
+    public ApiResult notAuthorization() {
+        return ApiResult.notAuthorization();
+    }
 }
 
