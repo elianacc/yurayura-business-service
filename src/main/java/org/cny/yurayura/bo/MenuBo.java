@@ -37,19 +37,9 @@ public class MenuBo implements Serializable {
     private String menuName;
 
     /**
-     * 路径
-     */
-    private String menuIndex;
-
-    /**
      * 图标样式
      */
     private String menuIconClass;
-
-    /**
-     * 父菜单id- 父菜单为0
-     */
-    private Integer menuPid;
 
     /**
      * 类型- 1：一级菜单，2：二级菜单

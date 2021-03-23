@@ -57,9 +57,9 @@ public class MenuSub implements Serializable {
     private String menuIconClass;
 
     /**
-     * 父菜单id- 父菜单为0
+     * 父菜单id
      */
-    @ApiModelProperty(value = "父菜单id- 父菜单为0")
+    @ApiModelProperty(value = "父菜单id")
     private Integer menuPid;
 
     /**

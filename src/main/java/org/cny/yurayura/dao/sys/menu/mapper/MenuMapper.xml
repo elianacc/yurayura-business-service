@@ -7,9 +7,7 @@
         <id column="id" property="id"/>
         <result column="menu_title" property="menuTitle"/>
         <result column="menu_name" property="menuName"/>
-        <result column="menu_index" property="menuIndex"/>
         <result column="menu_icon_class" property="menuIconClass"/>
-        <result column="menu_pid" property="menuPid"/>
         <result column="menu_type" property="menuType"/>
         <result column="menu_seq" property="menuSeq"/>
     </resultMap>
@@ -18,26 +16,27 @@
         <id column="id" property="id"/>
         <result column="menu_title" property="menuTitle"/>
         <result column="menu_name" property="menuName"/>
-        <result column="menu_index" property="menuIndex"/>
         <result column="menu_icon_class" property="menuIconClass"/>
-        <result column="menu_pid" property="menuPid"/>
         <result column="menu_type" property="menuType"/>
         <result column="menu_seq" property="menuSeq"/>
-        <collection property="menuSubList" ofType="org.cny.yurayura.entity.sys.menu.MenuSub">
-            <id column="submenu_id" property="id"/>
-            <result column="submenu_title" property="menuTitle"/>
-            <result column="submenu_name" property="menuName"/>
-            <result column="submenu_index" property="menuIndex"/>
-            <result column="submenu_icon_class" property="menuIconClass"/>
-            <result column="submenu_pid" property="menuPid"/>
-            <result column="submenu_type" property="menuType"/>
-            <result column="submenu_seq" property="menuSeq"/>
-        </collection>
+        <collection property="menuSubList" ofType="org.cny.yurayura.entity.sys.menu.MenuSub"
+                    resultMap="menuSubResultMap"/>
+    </resultMap>
+
+    <resultMap id="menuSubResultMap" type="org.cny.yurayura.entity.sys.menu.MenuSub">
+        <id column="submenu_id" property="id"/>
+        <result column="submenu_title" property="menuTitle"/>
+        <result column="submenu_name" property="menuName"/>
+        <result column="submenu_index" property="menuIndex"/>
+        <result column="submenu_icon_class" property="menuIconClass"/>
+        <result column="submenu_pid" property="menuPid"/>
+        <result column="submenu_type" property="menuType"/>
+        <result column="submenu_seq" property="menuSeq"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, menu_title, menu_name, menu_index, menu_icon_class, menu_pid, menu_type, menu_seq
+        id, menu_title, menu_name, menu_icon_class, menu_type, menu_seq
     </sql>
 
     <select id="getList" resultMap="getListResultMap">
@@ -45,9 +44,7 @@
             m.id,
             m.menu_title,
             m.menu_name,
-            m.menu_index,
             m.menu_icon_class,
-            m.menu_pid,
             m.menu_type,
             m.menu_seq,
             ms.id submenu_id,
