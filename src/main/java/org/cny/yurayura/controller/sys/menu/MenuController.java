@@ -1,8 +1,11 @@
 package org.cny.yurayura.controller.sys.menu;
 
 import io.swagger.annotations.*;
+import org.cny.yurayura.entity.sys.menu.Menu;
+import org.cny.yurayura.system.annotation.PreventRepeatSubmit;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.cny.yurayura.service.sys.menu.IMenuService;
@@ -62,6 +65,28 @@ public class MenuController {
     @ApiOperation("查询系统菜单列表")
     public ApiResult getList() {
         return iMenuService.getList();
+    }
+
+    /**
+     * 添加系统菜单
+     *
+     * @param menu
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    @PreventRepeatSubmit
+    @PostMapping("/insert")
+    @ApiOperation("添加系统菜单")
+    public ApiResult insert(@RequestBody Menu menu) {
+        if (StringUtils.isEmpty(menu.getMenuTitle())) {
+            return ApiResult.warn("标题不能为空");
+        } else if (StringUtils.isEmpty(menu.getMenuName())) {
+            return ApiResult.warn("标识不能为空");
+        } else if (StringUtils.isEmpty(menu.getMenuIconClass())) {
+            return ApiResult.warn("图标样式不能为空");
+        } else if (StringUtils.isEmpty(menu.getMenuSeq())) {
+            return ApiResult.warn("序号不能为空");
+        }
+        return iMenuService.insert(menu);
     }
 }
 

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.cny.yurayura.vo.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 系统菜单 service impl
@@ -24,4 +25,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     public ApiResult getList() {
         return ApiResult.success("列表查询成功", menuMapper.getList());
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public ApiResult insert(Menu menu) {
+        menuMapper.insert(menu);
+        return ApiResult.success("添加成功");
+    }
+
 }

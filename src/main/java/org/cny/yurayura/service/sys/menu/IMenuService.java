@@ -18,4 +18,12 @@ public interface IMenuService extends IService<Menu> {
      * @return org.cny.yurayura.vo.ApiResult
      */
     public ApiResult getList();
+
+    /**
+     * 添加系统菜单
+     *
+     * @param menu
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    public ApiResult insert(Menu menu);
 }
