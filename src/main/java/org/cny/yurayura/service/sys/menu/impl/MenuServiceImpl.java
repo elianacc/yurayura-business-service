@@ -2,6 +2,7 @@ package org.cny.yurayura.service.sys.menu.impl;
 
 import org.cny.yurayura.entity.sys.menu.Menu;
 import org.cny.yurayura.dao.sys.menu.MenuMapper;
+import org.cny.yurayura.enumerate.MenuTypeEnum;
 import org.cny.yurayura.service.sys.menu.IMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.cny.yurayura.vo.ApiResult;
@@ -29,6 +30,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Transactional(rollbackFor = Exception.class)
     @Override
     public ApiResult insert(Menu menu) {
+        menu.setMenuType(MenuTypeEnum.FIRSTLEVEL.getTypeId());
         menuMapper.insert(menu);
         return ApiResult.success("添加成功");
     }
