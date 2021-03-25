@@ -95,14 +95,14 @@ public class MenuController {
      * @param id
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/delete")
+    @PostMapping("/deleteById")
     @ApiOperation("删除系统菜单（根据id）")
     @ApiImplicitParam(name = "id", value = "id", required = true, defaultValue = "1", dataType = "int")
     public ApiResult delete(Integer id) {
         if (StringUtils.isEmpty(id)) {
             return ApiResult.warn("id不能为空");
         }
-        return iMenuService.delete(id);
+        return iMenuService.deleteById(id);
     }
 }
 

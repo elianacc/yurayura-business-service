@@ -1,7 +1,10 @@
 package org.cny.yurayura.service.sys.menu.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.cny.yurayura.dao.sys.menu.MenuSubMapper;
 import org.cny.yurayura.entity.sys.menu.Menu;
 import org.cny.yurayura.dao.sys.menu.MenuMapper;
+import org.cny.yurayura.entity.sys.menu.MenuSub;
 import org.cny.yurayura.enumerate.MenuTypeEnum;
 import org.cny.yurayura.service.sys.menu.IMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,6 +24,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 
     @Autowired
     private MenuMapper menuMapper;
+    @Autowired
+    private MenuSubMapper menuSubMapper;
 
     @Override
     public ApiResult getList() {
@@ -37,8 +42,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public ApiResult delete(Integer id) {
+    public ApiResult deleteById(Integer id) {
         menuMapper.deleteById(id);
+        QueryWrapper<MenuSub> queryWrapper = new QueryWrapper<>();
+        menuSubMapper.delete(queryWrapper.eq("menu_pid", id));
         return ApiResult.success("删除成功");
     }
 

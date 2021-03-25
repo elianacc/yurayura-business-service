@@ -33,5 +33,5 @@ public interface IMenuService extends IService<Menu> {
      * @param id
      * @return org.cny.yurayura.vo.ApiResult
      */
-    public ApiResult delete(Integer id);
+    public ApiResult deleteById(Integer id);
 }
