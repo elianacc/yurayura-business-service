@@ -10,7 +10,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.cny.yurayura.dao.sys.manager.ManagerMapper;
 import org.cny.yurayura.entity.sys.manager.Manager;
-import org.cny.yurayura.enumerate.ManagerStatusEnum;
+import org.cny.yurayura.enumerate.EnableStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -61,7 +61,7 @@ public class UserRealm extends AuthorizingRealm {
         QueryWrapper<Manager> queryWrapper = new QueryWrapper<>();
         Manager manager = managerMapper.selectOne(queryWrapper
                 .eq("manager_name", userToken.getUsername())
-                .eq("manager_status", ManagerStatusEnum.ENABLE.getStatusId()));
+                .eq("manager_status", EnableStatusEnum.ENABLE.getStatusId()));
         // 判断用户是否存在
         if (StringUtils.isEmpty(manager)) {
             return null;

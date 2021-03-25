@@ -7,7 +7,7 @@ import com.github.pagehelper.PageInfo;
 import org.cny.yurayura.dao.sys.dict.DictMapper;
 import org.cny.yurayura.dto.DictSelectDto;
 import org.cny.yurayura.entity.sys.dict.Dict;
-import org.cny.yurayura.enumerate.DictStatusEnum;
+import org.cny.yurayura.enumerate.EnableStatusEnum;
 import org.cny.yurayura.service.sys.dict.IDictService;
 import org.cny.yurayura.system.util.RedisUtil;
 import org.cny.yurayura.vo.ApiResult;
@@ -51,7 +51,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
     @Override
     public ApiResult insert(Dict dict) {
         dictMapper.insert(dict);
-        if (dict.getDictStatus().intValue() == DictStatusEnum.ENABLE.getStatusId()) {
+        if (dict.getDictStatus().intValue() == EnableStatusEnum.ENABLE.getStatusId()) {
             // 插入字典记录到redis
             redisUtil.lSet(dict.getDictCode(), dict);
         }
@@ -76,7 +76,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
         Dict oldDict = dictMapper.selectById(dict.getId()); // 原字典记录
         // 先从redis删除原字典记录
         redisUtil.lRemove(oldDict.getDictCode(), 0, oldDict);
-        if (dict.getDictStatus().intValue() == DictStatusEnum.ENABLE.getStatusId()) {
+        if (dict.getDictStatus().intValue() == EnableStatusEnum.ENABLE.getStatusId()) {
             // 再插入新的字典记录到redis
             redisUtil.lSet(dict.getDictCode(), dict);
         }
@@ -93,7 +93,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
         QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
         List<Dict> dictList = dictMapper.selectList(queryWrapper
                 .eq("dict_code", dictCode)
-                .eq("dict_status", DictStatusEnum.ENABLE.getStatusId())
+                .eq("dict_status", EnableStatusEnum.ENABLE.getStatusId())
                 .orderByAsc("id"));
         if (dictList.isEmpty()) {
             return ApiResult.warn("字典编码：" + dictCode + "对应系统数据字典为空");

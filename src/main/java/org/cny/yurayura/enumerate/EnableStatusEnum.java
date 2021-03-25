@@ -3,13 +3,13 @@ package org.cny.yurayura.enumerate;
 import lombok.Getter;
 
 /**
- * 系统管理员状态 enum
+ * 启用状态 enum
  *
  * @author CNY
- * @since 2019-12-30
+ * @since 2021-03-25
  */
 @Getter
-public enum ManagerStatusEnum {
+public enum EnableStatusEnum {
 
     /**
      * 禁用
@@ -22,7 +22,7 @@ public enum ManagerStatusEnum {
 
     private Integer statusId;
 
-    ManagerStatusEnum(int statusId) {
+    EnableStatusEnum(int statusId) {
         this.statusId = statusId;
     }
 
