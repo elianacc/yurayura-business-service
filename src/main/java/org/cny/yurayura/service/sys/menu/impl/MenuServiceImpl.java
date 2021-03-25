@@ -35,4 +35,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         return ApiResult.success("添加成功");
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public ApiResult delete(Integer id) {
+        menuMapper.deleteById(id);
+        return ApiResult.success("删除成功");
+    }
+
+
 }
