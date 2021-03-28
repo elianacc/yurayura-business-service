@@ -1,8 +1,11 @@
 package org.cny.yurayura.controller.sys.menu;
 
 import io.swagger.annotations.*;
+import org.cny.yurayura.entity.sys.menu.MenuSub;
+import org.cny.yurayura.system.annotation.PreventRepeatSubmit;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.cny.yurayura.service.sys.menu.IMenuSubService;
@@ -37,6 +40,32 @@ public class MenuSubController {
             return ApiResult.warn("id不能为空");
         }
         return ApiResult.success("查询成功", iMenuSubService.getById(id));
+    }
+
+    /**
+     * 添加系统子菜单
+     *
+     * @param menuSub
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    @PreventRepeatSubmit
+    @PostMapping("/insert")
+    @ApiOperation("添加系统子菜单")
+    public ApiResult insert(@RequestBody MenuSub menuSub) {
+        if (StringUtils.isEmpty(menuSub.getMenuTitle())) {
+            return ApiResult.warn("标题不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuName())) {
+            return ApiResult.warn("标识不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuIconClass())) {
+            return ApiResult.warn("图标样式不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuSeq())) {
+            return ApiResult.warn("序号不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuIndex())) {
+            return ApiResult.warn("路径不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuPid())) {
+            return ApiResult.warn("父菜单id不能为空");
+        }
+        return iMenuSubService.insert(menuSub);
     }
 }
 
