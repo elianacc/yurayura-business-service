@@ -1,12 +1,12 @@
-### YuraYura-Business-Service项目简介及技术构成
+# YuraYura-Business-Service
 
 
 
-##### 简介：
+## 简介：
 
-> YuraYura-Business-Service是Yura-Yura分离出来的部分，旨在为前端Vue-cli项目提供后台管理部分的接口服务
+> YuraYura是一个兴趣使然的项目，主要的功能是做番剧的导视，数据的应用，YuraYura-Business-Service是Yura-Yura分离出来的部分，旨在为前端Vue-cli项目提供后台管理部分的接口服务
 
-##### 后端：
+## 后端：
 
 - ​    总体： SpringBoot2.x
 - ​    数据库持久层： mybatis + mybatis plus
@@ -23,7 +23,7 @@
 - ​    JSON处理工具： fastjson
 - ​    测试工具： junit4
 
-##### 其他：
+## 其他：
 
 - ​    全局捕获异常处理
 - ​    AOP统一处理Web请求日志
@@ -32,10 +32,9 @@
 - ​    发送Email服务
 - ​    系统数据字典
 - ​    外部静态资源访问处理
-- ​    视图控制器
 - ​    跨域处理
 
-##### 开发工具：
+## 开发工具：
 
 - ​    开发环境： JDK 1.8
 - ​    编码： IntelliJ IDEA（idea）
