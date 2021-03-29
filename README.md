@@ -4,7 +4,7 @@
 
 ## 简介：
 
-> YuraYura是一个兴趣使然的项目，主要的功能是做番剧的导视，数据的应用，YuraYura-Business-Service是Yura-Yura分离出来的部分，旨在为前端Vue-cli项目提供后台管理部分的接口服务
+> YuraYura-Business-Service是Yura-Yura分离出来的部分，旨在为前端vue-cli项目提供后台管理部分的接口服务
 
 ## 后端：
 
