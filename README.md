@@ -6,7 +6,7 @@
 
 > YuraYura-Business-Service是Yura-Yura分离出来的部分，旨在为前端vue-cli项目提供后台管理部分的接口服务
 
-## 后端
+## 项目构成
 
 - ​    总体： SpringBoot2.x
 - ​    数据库持久层： mybatis + mybatis plus
@@ -23,7 +23,7 @@
 - ​    JSON处理工具： fastjson
 - ​    测试工具： junit4
 
-## 其他
+## 常用功能实现
 
 - ​    全局捕获异常处理
 - ​    AOP统一处理Web请求日志
