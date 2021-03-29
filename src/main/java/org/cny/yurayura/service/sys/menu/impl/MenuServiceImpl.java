@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * 系统菜单 service impl
  *
@@ -35,6 +37,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Transactional(rollbackFor = Exception.class)
     @Override
     public ApiResult insert(Menu menu) {
+        List<String> menuNameList = menuMapper.getMenuNameAndMenuSubName();
+        if (menuNameList.contains(menu.getMenuName())) {
+            return ApiResult.warn("菜单标识已存在，请更换");
+        }
         menu.setMenuType(MenuTypeEnum.FIRSTLEVEL.getTypeId());
         menuMapper.insert(menu);
         return ApiResult.success("添加成功");
@@ -49,5 +55,15 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         return ApiResult.success("删除成功");
     }
 
-
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public ApiResult update(Menu menu) {
+        Menu oldMenu = menuMapper.selectById(menu.getId());
+        List<String> menuNameList = menuMapper.getMenuNameAndMenuSubName();
+        if (menuNameList.contains(menu.getMenuName()) && !menu.getMenuName().equals(oldMenu.getMenuName())) {
+            return ApiResult.warn("菜单标识已存在，请更换");
+        }
+        menuMapper.updateById(menu);
+        return ApiResult.success("修改成功");
+    }
 }

@@ -63,4 +63,36 @@
             ms.menu_seq
     </select>
 
+    <select id="getMenuNameAndMenuSubName" resultType="java.lang.String">
+        SELECT DISTINCT
+        substring_index(
+            substring_index(
+            a.menuName,
+            ',',
+            b.help_topic_id + 1
+            ),
+            ',' ,- 1
+        ) menuName
+        FROM
+        (
+            SELECT
+            GROUP_CONCAT(
+            CONCAT(
+            m.menu_name,
+            ',',
+            ms.menu_name
+            )
+            ) menuName
+            FROM
+            yurayura_sys_menu m
+            LEFT JOIN yurayura_sys_menu_sub ms ON m.id = ms.menu_pid
+            ORDER BY
+            m.menu_seq,
+            ms.menu_seq
+        ) a
+        JOIN mysql.help_topic b ON b.help_topic_id <![CDATA[<]]> (
+        length(a.menuName) - length(REPLACE(a.menuName, ',', '')) + 1
+        )
+    </select>
+
 </mapper>

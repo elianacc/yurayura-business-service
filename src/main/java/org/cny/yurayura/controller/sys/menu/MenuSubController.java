@@ -67,5 +67,49 @@ public class MenuSubController {
         }
         return iMenuSubService.insert(menuSub);
     }
+
+    /**
+     * 删除系统子菜单（根据id）
+     *
+     * @param id
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    @PostMapping("/deleteById")
+    @ApiOperation("删除系统子菜单（根据id）")
+    @ApiImplicitParam(name = "id", value = "id", required = true, defaultValue = "1", dataType = "int")
+    public ApiResult deleteById(Integer id) {
+        if (StringUtils.isEmpty(id)) {
+            return ApiResult.warn("id不能为空");
+        }
+        return iMenuSubService.deleteById(id);
+    }
+
+    /**
+     * 修改系统子菜单
+     *
+     * @param menuSub
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    @PreventRepeatSubmit
+    @PostMapping("/update")
+    @ApiOperation("修改系统子菜单")
+    public ApiResult update(@RequestBody MenuSub menuSub) {
+        if (StringUtils.isEmpty(menuSub.getId())) {
+            return ApiResult.warn("id不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuTitle())) {
+            return ApiResult.warn("标题不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuName())) {
+            return ApiResult.warn("标识不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuIconClass())) {
+            return ApiResult.warn("图标样式不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuSeq())) {
+            return ApiResult.warn("序号不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuIndex())) {
+            return ApiResult.warn("路径不能为空");
+        } else if (StringUtils.isEmpty(menuSub.getMenuPid())) {
+            return ApiResult.warn("父菜单id不能为空");
+        }
+        return iMenuSubService.update(menuSub);
+    }
 }
 

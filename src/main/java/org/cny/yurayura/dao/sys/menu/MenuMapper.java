@@ -20,4 +20,12 @@ public interface MenuMapper extends BaseMapper<Menu> {
      * @return java.util.List<org.cny.yurayura.bo.MenuBo>
      */
     List<MenuBo> getList();
+
+    /**
+     * 查询系统菜单，子菜单标识
+     *
+     * @param
+     * @return java.util.List<java.lang.String>
+     */
+    List<String> getMenuNameAndMenuSubName();
 }

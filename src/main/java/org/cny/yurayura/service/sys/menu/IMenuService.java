@@ -34,4 +34,12 @@ public interface IMenuService extends IService<Menu> {
      * @return org.cny.yurayura.vo.ApiResult
      */
     public ApiResult deleteById(Integer id);
+
+    /**
+     * 修改系统菜单
+     *
+     * @param menu
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    public ApiResult update(Menu menu);
 }
