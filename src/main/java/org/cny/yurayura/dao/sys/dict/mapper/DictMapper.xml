@@ -9,11 +9,12 @@
         <result column="dict_name" property="dictName"/>
         <result column="dict_val" property="dictVal"/>
         <result column="dict_status" property="dictStatus"/>
+        <result column="dict_seq" property="dictSeq"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, dict_code, dict_name, dict_val, dict_status
+        id, dict_code, dict_name, dict_val, dict_status, dict_seq
     </sql>
 
 </mapper>

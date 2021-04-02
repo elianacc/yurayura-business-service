@@ -1,5 +1,6 @@
 package org.cny.yurayura.service.sys.dict.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
@@ -16,7 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 系统数据字典 service impl
@@ -39,7 +42,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
         QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
         List<Dict> dictList = dictMapper.selectList(queryWrapper
                 .like(!StringUtils.isEmpty(dto.getDictCode()), "dict_code", dto.getDictCode())
-                .orderByAsc("dict_code", "id"));
+                .orderByAsc("dict_code", "dict_seq"));
         PageInfo<Dict> pageInfo = new PageInfo<>(dictList, 5);
         if (pageInfo.getTotal() == 0) {
             return ApiResult.warn("查询不到数据");
@@ -88,13 +91,16 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
     public ApiResult getByDictCode(String dictCode) {
         // 判断是否存在这个字典编码key对应的字典记录在redis，存在则直接获取，不存在从数据库查询
         if (redisUtil.hasKey(dictCode) && !redisUtil.lGet(dictCode, 0, -1).isEmpty()) {
-            return ApiResult.success("查询成功", redisUtil.lGet(dictCode, 0, -1));
+            List<Object> objList = redisUtil.lGet(dictCode, 0, -1);
+            List<Dict> dictList = JSON.parseArray(JSON.toJSONString(objList), Dict.class);
+            List<Dict> dictSortList = dictList.stream().sorted(Comparator.comparing(Dict::getDictSeq)).collect(Collectors.toList());
+            return ApiResult.success("查询成功", dictSortList);
         }
         QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
         List<Dict> dictList = dictMapper.selectList(queryWrapper
                 .eq("dict_code", dictCode)
                 .eq("dict_status", EnableStatusEnum.ENABLE.getStatusId())
-                .orderByAsc("id"));
+                .orderByAsc("dict_seq"));
         if (dictList.isEmpty()) {
             return ApiResult.warn("字典编码：" + dictCode + "对应系统数据字典为空");
         }
