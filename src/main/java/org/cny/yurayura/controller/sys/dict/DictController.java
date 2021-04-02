@@ -78,6 +78,8 @@ public class DictController {
             return ApiResult.warn("字典值不能为空");
         } else if (StringUtils.isEmpty(dict.getDictStatus())) {
             return ApiResult.warn("字典状态不能为空");
+        } else if (StringUtils.isEmpty(dict.getDictSeq())) {
+            return ApiResult.warn("序号不能为空");
         }
         return iDictService.insert(dict);
     }
@@ -118,6 +120,8 @@ public class DictController {
             return ApiResult.warn("字典值不能为空");
         } else if (StringUtils.isEmpty(dict.getDictStatus())) {
             return ApiResult.warn("字典状态不能为空");
+        } else if (StringUtils.isEmpty(dict.getDictSeq())) {
+            return ApiResult.warn("序号不能为空");
         }
         return iDictService.update(dict);
     }
