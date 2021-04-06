@@ -46,6 +46,12 @@ public class Comic implements Serializable {
     private String comicName;
 
     /**
+     * 评分
+     */
+    @ApiModelProperty(value = "评分")
+    private Double comicScore;
+
+    /**
      * 简介
      */
     @ApiModelProperty(value = "简介")

@@ -1,16 +1,17 @@
 package org.cny.yurayura.controller.sys.menu;
 
-import io.swagger.annotations.*;
-import org.cny.yurayura.dao.sys.menu.MenuMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.cny.yurayura.entity.sys.menu.Menu;
+import org.cny.yurayura.service.sys.menu.IMenuService;
 import org.cny.yurayura.system.annotation.PreventRepeatSubmit;
+import org.cny.yurayura.vo.ApiResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.cny.yurayura.service.sys.menu.IMenuService;
-import org.cny.yurayura.vo.ApiResult;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
