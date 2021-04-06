@@ -52,7 +52,7 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
         QueryWrapper<Manager> queryWrapper = new QueryWrapper<>();
         List<Manager> managerList = managerMapper.selectList(queryWrapper
-                .like(!StringUtils.isEmpty(dto), "manager_name", dto.getManagerName()));
+                .like(!StringUtils.isEmpty(dto.getManagerName()), "manager_name", dto.getManagerName()));
         PageInfo<Manager> pageInfo = new PageInfo<>(managerList, 5);
         if (pageInfo.getTotal() == 0) {
             return ApiResult.warn("查询不到数据");
