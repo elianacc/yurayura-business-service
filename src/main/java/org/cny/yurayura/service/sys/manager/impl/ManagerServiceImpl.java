@@ -52,6 +52,7 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
         QueryWrapper<Manager> queryWrapper = new QueryWrapper<>();
         List<Manager> managerList = managerMapper.selectList(queryWrapper
+                .select(Manager.class, i -> !i.getColumn().equals("manager_password"))
                 .like(!StringUtils.isEmpty(dto.getManagerName()), "manager_name", dto.getManagerName()));
         PageInfo<Manager> pageInfo = new PageInfo<>(managerList, 5);
         if (pageInfo.getTotal() == 0) {
