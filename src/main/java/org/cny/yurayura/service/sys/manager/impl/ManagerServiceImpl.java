@@ -88,6 +88,7 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
         } else {
             manager.setManagerPassword(DigestUtils.md5DigestAsHex(manager.getManagerPassword().getBytes()));
         }
+        manager.setManagerUpdateTime(LocalDateTime.now());
         managerMapper.updateById(manager);
         return ApiResult.success("修改成功");
     }

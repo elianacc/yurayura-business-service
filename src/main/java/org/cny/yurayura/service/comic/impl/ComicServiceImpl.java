@@ -86,14 +86,14 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
                 comic.setComicImageUrl("/upload/" + imgUplRes);
             }
             comic.setComicCreateTime(LocalDateTime.now());
-            comic.setComicUpdateTime(LocalDateTime.now());
+            comic.setComicUpdateTime(null);
             comicMapper.insert(comic);
             comicUserData.setComicId(comic.getId());
             comicUserData.setComicName(comic.getComicName());
             comicUserData.setComicPlayNum(0);
             comicUserData.setComicFavoriteNum(0);
             comicUserData.setComicUserDataCreateTime(LocalDateTime.now());
-            comicUserData.setComicUserDataUpdateTime(LocalDateTime.now());
+            comicUserData.setComicUserDataUpdateTime(null);
             comicUserDataMapper.insert(comicUserData);
             return ApiResult.success("添加成功");
         }

@@ -87,8 +87,8 @@ public class ManagerController {
             return ApiResult.warn("管理员名不能为空");
         } else if (StringUtils.isEmpty(manager.getManagerPassword())) {
             return ApiResult.warn("管理员密码不能为空");
-        } else if (StringUtils.isEmpty(manager.getManagerPermission())) {
-            return ApiResult.warn("管理员权限不能为空");
+        } else if (!manager.getManagerPermission().contains("select")) {
+            return ApiResult.warn("管理员必须添加查询权限");
         } else if (StringUtils.isEmpty(manager.getManagerStatus())) {
             return ApiResult.warn("管理员状态不能为空");
         }
@@ -123,8 +123,8 @@ public class ManagerController {
     public ApiResult update(@RequestBody Manager manager) {
         if (manager.getId() == 0) {
             return ApiResult.warn("id不能为空");
-        } else if (StringUtils.isEmpty(manager.getManagerPermission())) {
-            return ApiResult.warn("管理员权限不能为空");
+        } else if (!manager.getManagerPermission().contains("select")) {
+            return ApiResult.warn("管理员必须添加查询权限");
         } else if (StringUtils.isEmpty(manager.getManagerStatus())) {
             return ApiResult.warn("管理员状态不能为空");
         }
