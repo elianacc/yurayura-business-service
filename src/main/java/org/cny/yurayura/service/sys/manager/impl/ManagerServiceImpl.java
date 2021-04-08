@@ -114,11 +114,13 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
                 Session session = subject.getSession();
                 // 存入shiro的session
                 session.setAttribute("managerSession", currentManger);
+                // 设置session过期时间为24小时
+                session.setTimeout(1000 * 60 * 60 * 24);
                 // 将sessionId存入浏览器对应sessionId的cookie
                 Cookie cookie = new Cookie("JSESSIONID", URLEncoder.encode(String.valueOf(session.getId()), "utf-8"));
                 cookie.setPath("/");
-                // 设置sessionId cookie有效期为180分钟，关闭浏览器session也不会消失，记住登入
-                cookie.setMaxAge(60 * 60 * 3);
+                // 设置sessionId cookie有效期为24小时，关闭浏览器session也不会消失，记住登入
+                cookie.setMaxAge(60 * 60 * 24);
                 // js无法读取cookie，防止xss攻击
                 cookie.setHttpOnly(true);
                 response.addCookie(cookie);
