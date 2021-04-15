@@ -56,4 +56,4 @@ yurayura:
   receive-email: elianacc@126.com
   # 上传文件对外暴露的访问路径(虚拟路径)
   upload-file:
-    virtual-path: /upload/**
+    virtual-path: /upload
