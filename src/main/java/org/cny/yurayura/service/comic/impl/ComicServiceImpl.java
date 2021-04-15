@@ -11,6 +11,7 @@ import org.cny.yurayura.dto.ComicSelectDto;
 import org.cny.yurayura.entity.comic.Comic;
 import org.cny.yurayura.entity.comic.ComicUserData;
 import org.cny.yurayura.enumerate.ComicStatusEnum;
+import org.cny.yurayura.enumerate.ImgUploadCategoryEnum;
 import org.cny.yurayura.enumerate.ImgUploadResultEnum;
 import org.cny.yurayura.service.comic.IComicService;
 import org.cny.yurayura.system.util.FileUtil;
@@ -67,7 +68,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         }
 
         // 获取图片上传结果
-        String imgUplRes = FileUtil.imageUpload(dto.getComicImgFile());
+        String imgUplRes = FileUtil.imageUpload(dto.getComicImgFile(), 100, ImgUploadCategoryEnum.COMICIMG.getCategory());
 
         Comic comic = new Comic();
         ComicUserData comicUserData = new ComicUserData();
@@ -83,7 +84,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
             comic.setComicImageUrl(defaultUplCmImg);
             // 上传图片不为空，番剧图片地址使用上传图片地址
             if (!imgUplRes.equals(ImgUploadResultEnum.NULL.getResult())) {
-                comic.setComicImageUrl("/upload/" + imgUplRes);
+                comic.setComicImageUrl(imgUplRes);
             }
             comic.setComicCreateTime(LocalDateTime.now());
             comic.setComicUpdateTime(null);
@@ -128,7 +129,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
         }
 
         // 获取图片上传结果
-        String imgUplRes = FileUtil.imageUpload(dto.getComicImgFile());
+        String imgUplRes = FileUtil.imageUpload(dto.getComicImgFile(), 100, ImgUploadCategoryEnum.COMICIMG.getCategory());
 
         Comic comic = new Comic();
 
@@ -142,7 +143,7 @@ public class ComicServiceImpl extends ServiceImpl<ComicMapper, Comic> implements
             comic.setComicUpdateTime(LocalDateTime.now());
             // 上传图片不为空，番剧图片地址使用上传图片地址
             if (!imgUplRes.equals(ImgUploadResultEnum.NULL.getResult())) {
-                comic.setComicImageUrl("/upload/" + imgUplRes);
+                comic.setComicImageUrl(imgUplRes);
                 Comic aComic = comicMapper.selectById(comic.getId());
                 // 如果用的是默认图片的，则不删除
                 if (!(aComic.getComicImageUrl().equals(defaultUplCmImg))) {

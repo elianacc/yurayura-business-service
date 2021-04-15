@@ -20,7 +20,7 @@ public enum ImgUploadResultEnum {
      */
     FORMATNOTALLOW("1"),
     /**
-     * 上传图片不能超过100KB
+     * 上传图片不能超过限制大小
      */
     SIZEBEYOND("2");
 

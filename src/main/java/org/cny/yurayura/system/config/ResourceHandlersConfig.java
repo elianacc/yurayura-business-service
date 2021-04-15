@@ -21,6 +21,9 @@ public class ResourceHandlersConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(virtualPath).addResourceLocations("file:" + uploadPath);
+        // 番剧图片真实上传位置映射虚拟路径
+        registry.addResourceHandler(virtualPath + "/comicImg/**").addResourceLocations("file:" + uploadPath + "/comicImg/");
+        // 用户头像真实上传位置映射虚拟路径
+        registry.addResourceHandler(virtualPath + "/userAvatar/**").addResourceLocations("file:" + uploadPath + "/userAvatar/");
     }
 }
