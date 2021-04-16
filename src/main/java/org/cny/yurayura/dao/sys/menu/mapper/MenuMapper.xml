@@ -76,13 +76,13 @@
         FROM
         (
             SELECT
-            GROUP_CONCAT(
-            CONCAT(
-            m.menu_name,
-            ',',
-            ms.menu_name
-            )
-            ) menuName
+                GROUP_CONCAT(
+                    CONCAT(
+                    m.menu_name,
+                    ',',
+                    IFNULL(ms.menu_name, '')
+                    )
+                ) menuName
             FROM
             yurayura_sys_menu m
             LEFT JOIN yurayura_sys_menu_sub ms ON m.id = ms.menu_pid
