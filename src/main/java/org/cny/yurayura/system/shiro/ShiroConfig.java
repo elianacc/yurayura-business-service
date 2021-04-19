@@ -44,6 +44,10 @@ public class ShiroConfig {
         fillterMap.put("/api/comic/insert*", "perms[insert]");
         fillterMap.put("/api/comic/delete*", "perms[delete]");
         fillterMap.put("/api/comic/update*", "perms[update]");
+        fillterMap.put("/api/user/get*", "perms[select]");
+        fillterMap.put("/api/user/insert*", "perms[insert]");
+        fillterMap.put("/api/user/delete*", "perms[delete]");
+        fillterMap.put("/api/user/update*", "perms[update]");
         fillterMap.put("/api/sys/dict/getByDictCode", "perms[select]");
         fillterMap.put("/api/sys/dict/**", "perms[sys]");
         fillterMap.put("/api/sys/manager/getVerifyCode", "anon");

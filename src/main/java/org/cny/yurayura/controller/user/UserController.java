@@ -10,6 +10,7 @@ import org.cny.yurayura.vo.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,7 +52,7 @@ public class UserController {
      */
     @PostMapping("/getPage")
     @ApiOperation("分页查询用户")
-    public ApiResult getPage(UserSelectDto dto) {
+    public ApiResult getPage(@RequestBody UserSelectDto dto) {
         if (StringUtils.isEmpty(dto.getPageNum())) {
             return ApiResult.warn("页码不能为空");
         } else if (StringUtils.isEmpty(dto.getPageSize())) {

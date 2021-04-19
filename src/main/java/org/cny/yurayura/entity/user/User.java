@@ -1,22 +1,18 @@
 package org.cny.yurayura.entity.user;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-
-import java.time.LocalDate;
-
 import com.baomidou.mybatisplus.annotation.TableId;
-
-import java.time.LocalDateTime;
-import java.io.Serializable;
-
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 用户 entity
@@ -65,10 +61,10 @@ public class User implements Serializable {
     private String userSignature;
 
     /**
-     * 性别
+     * 性别- 1：男，0：女
      */
-    @ApiModelProperty(value = "性别")
-    private String userSex;
+    @ApiModelProperty(value = "性别- 1：男，0：女")
+    private Integer userSex;
 
     /**
      * 生日
@@ -108,16 +104,15 @@ public class User implements Serializable {
     private String userPhoneNumber;
 
     /**
-     * 状态- 0：正常，3：小黑屋3天，7：小黑屋7天，30：小黑屋30天，365：小黑屋365天，999：小黑屋永久
+     * 状态- 0：正常，-3：小黑屋3天，-7：小黑屋7天，-30：小黑屋30天，-365：小黑屋365天，-999：小黑屋永久
      */
-    @ApiModelProperty(value = "状态- 0：正常，3：小黑屋3天，7：小黑屋7天，30：小黑屋30天，365：小黑屋365天，999：小黑屋永久")
+    @ApiModelProperty(value = "状态- 0：正常，-3：小黑屋3天，-7：小黑屋7天，-30：小黑屋30天，-365：小黑屋365天，-999：小黑屋永久")
     private Integer userStatus;
 
     /**
      * 注册时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "注册时间")
     private LocalDateTime userRegTime;
 
@@ -125,7 +120,6 @@ public class User implements Serializable {
      * 最近编辑时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "最近编辑时间")
     private LocalDateTime userCurrentEditTime;
 

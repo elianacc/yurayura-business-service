@@ -23,19 +23,25 @@ public class UserSelectDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户名
+     * 用户名-昵称关键字
      */
-    @ApiModelProperty(value = "用户名")
-    private String userName;
+    @ApiModelProperty(value = "用户名-昵称关键字")
+    private String userNameKeyword;
 
     /**
-     * 性别
+     * 性别- 1：男，0：女
      */
-    @ApiModelProperty(value = "性别")
-    private String userSex;
+    @ApiModelProperty(value = "性别- 1：男，0：女")
+    private Integer userSex;
 
     /**
-     * 状态- 0：正常，3：小黑屋3天，7：小黑屋7天，30：小黑屋30天，365：小黑屋365天，999：小黑屋永久
+     * 手机号
+     */
+    @ApiModelProperty(value = "手机号")
+    private String userPhoneNumber;
+
+    /**
+     * 状态- 0：正常，-3：小黑屋3天，-7：小黑屋7天，-30：小黑屋30天，-365：小黑屋365天，-999：小黑屋永久
      */
     @ApiModelProperty(value = "状态")
     private Integer userStatus;

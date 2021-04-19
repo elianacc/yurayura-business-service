@@ -1,6 +1,5 @@
 package org.cny.yurayura.service.user.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
@@ -34,13 +33,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         List<User> userList = userMapper.selectList(queryWrapper
-                .select("id", "user_avatar_url", "user_name", "user_sex", "user_status", "user_reg_time"
-                        , "user_current_edit_time")
-                .like(!StringUtils.isEmpty(dto.getUserName()), "user_name", dto.getUserName())
+                .select(User.class, i -> !i.getColumn().equals("user_password"))
+                .like(!StringUtils.isEmpty(dto.getUserNameKeyword()), "user_name", dto.getUserNameKeyword())
+                .or()
+                .like(!StringUtils.isEmpty(dto.getUserNameKeyword()), "user_nickname", dto.getUserNameKeyword())
                 .eq(!StringUtils.isEmpty(dto.getUserSex()), "user_sex", dto.getUserSex())
                 .eq(!StringUtils.isEmpty(dto.getUserStatus()), "user_status", dto.getUserStatus())
+                .eq(!StringUtils.isEmpty(dto.getUserPhoneNumber()), "user_phone_number", dto.getUserPhoneNumber())
                 .orderByDesc("id"));
-        PageInfo<Object> pageInfo = new PageInfo<>(JSON.parseArray(JSON.toJSONString(userList)), 5);
+        PageInfo<User> pageInfo = new PageInfo<>(userList, 5);
         if (pageInfo.getTotal() == 0) {
             return ApiResult.warn("查询不到数据");
         }
