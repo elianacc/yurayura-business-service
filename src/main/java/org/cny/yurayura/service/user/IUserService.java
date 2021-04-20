@@ -21,4 +21,12 @@ public interface IUserService extends IService<User> {
      */
     public ApiResult getPage(UserSelectDto dto);
 
+    /**
+     * 修改状态（根据id）
+     *
+     * @param user
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    public ApiResult updateStatus(User user);
+
 }

@@ -117,7 +117,7 @@ public class MenuController {
     @PostMapping("/update")
     @ApiOperation("修改系统菜单")
     public ApiResult update(@RequestBody Menu menu) {
-        if (StringUtils.isEmpty(menu.getId())) {
+        if (StringUtils.isEmpty(menu.getId()) || menu.getId() == 0) {
             return ApiResult.warn("id不能为空");
         } else if (StringUtils.isEmpty(menu.getMenuTitle())) {
             return ApiResult.warn("标题不能为空");

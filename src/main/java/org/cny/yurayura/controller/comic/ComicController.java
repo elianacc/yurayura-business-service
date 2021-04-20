@@ -110,7 +110,7 @@ public class ComicController {
     @PostMapping("/update")
     @ApiOperation("修改番剧")
     public ApiResult update(ComicInstAndUpdtDto dto) {
-        if (dto.getId() == 0) {
+        if (StringUtils.isEmpty(dto.getId()) || dto.getId() == 0) {
             return ApiResult.warn("id不能为空");
         } else if (StringUtils.isEmpty(dto.getComicName())) {
             return ApiResult.warn("名称不能为空");

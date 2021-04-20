@@ -47,4 +47,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         return ApiResult.success("分页查询成功", pageInfo);
     }
+
+    @Override
+    public ApiResult updateStatus(User user) {
+        userMapper.updateById(user);
+        return ApiResult.success("修改状态成功");
+    }
 }

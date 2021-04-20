@@ -110,7 +110,7 @@ public class DictController {
     @PostMapping("/update")
     @ApiOperation("修改系统数据字典")
     public ApiResult update(@RequestBody Dict dict) {
-        if (dict.getId() == 0) {
+        if (StringUtils.isEmpty(dict.getId()) || dict.getId() == 0) {
             return ApiResult.warn("id不能为空");
         } else if (StringUtils.isEmpty(dict.getDictCode())) {
             return ApiResult.warn("字典编码不能为空");
