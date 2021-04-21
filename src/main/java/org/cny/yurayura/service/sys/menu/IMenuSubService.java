@@ -35,4 +35,12 @@ public interface IMenuSubService extends IService<MenuSub> {
      * @return org.cny.yurayura.vo.ApiResult
      */
     public ApiResult update(MenuSub menuSub);
+
+    /**
+     * 查询系统子菜单（根据路径）
+     *
+     * @param index
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    public ApiResult getByIndex(String index);
 }

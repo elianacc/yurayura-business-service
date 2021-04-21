@@ -111,5 +111,20 @@ public class MenuSubController {
         }
         return iMenuSubService.update(menuSub);
     }
+
+    /**
+     * 查询系统子菜单（根据路径）
+     *
+     * @param index
+     * @return org.cny.yurayura.vo.ApiResult
+     */
+    @PostMapping("/getByIndex")
+    @ApiOperation("查询系统子菜单（根据路径）")
+    public ApiResult getByIndex(String index) {
+        if (StringUtils.isEmpty(index)) {
+            return ApiResult.warn("路径不能为空");
+        }
+        return iMenuSubService.getByIndex(index);
+    }
 }
 

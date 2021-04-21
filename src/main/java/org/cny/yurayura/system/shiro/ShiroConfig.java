@@ -59,6 +59,8 @@ public class ShiroConfig {
         fillterMap.put("/api/sys/manager/**", "perms[sys]");
         fillterMap.put("/api/sys/menu/getSysMenu", "perms[select]");
         fillterMap.put("/api/sys/menu/**", "perms[sys]");
+        fillterMap.put("/api/sys/menuSub/getByIndex", "perms[select]");
+        fillterMap.put("/api/sys/menuSub/**", "perms[sys]");
 
         filterFactoryBean.setFilterChainDefinitionMap(fillterMap);
         filterFactoryBean.setLoginUrl("/api/sys/manager/notAuthentication");

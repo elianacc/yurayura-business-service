@@ -1,5 +1,6 @@
 package org.cny.yurayura.service.sys.menu.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.cny.yurayura.dao.sys.menu.MenuMapper;
 import org.cny.yurayura.entity.sys.menu.MenuSub;
 import org.cny.yurayura.dao.sys.menu.MenuSubMapper;
@@ -56,5 +57,12 @@ public class MenuSubServiceImpl extends ServiceImpl<MenuSubMapper, MenuSub> impl
         }
         menuSubMapper.updateById(menuSub);
         return ApiResult.success("修改成功");
+    }
+
+    @Override
+    public ApiResult getByIndex(String index) {
+        QueryWrapper<MenuSub> queryWrapper = new QueryWrapper<>();
+        MenuSub menuSub = menuSubMapper.selectOne(queryWrapper.eq("menu_index", index));
+        return ApiResult.success("查询成功", menuSub);
     }
 }
