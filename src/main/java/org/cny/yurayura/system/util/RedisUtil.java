@@ -22,6 +22,8 @@ public class RedisUtil {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+//    ============================== common ==============================
+
     /**
      * 指定缓存失效时间
      *
@@ -44,8 +46,8 @@ public class RedisUtil {
     /**
      * 根据 key 获取过期时间
      *
-     * @param key 键
-     * @return
+     * @param key 键 不能为null
+     * @return 时间(秒) 返回0代表为永久有效
      */
     public long getExpire(String key) {
         return redisTemplate.getExpire(key, TimeUnit.SECONDS);
@@ -70,7 +72,7 @@ public class RedisUtil {
      * 删除缓存
      *
      * @param key 键（一个或者多个）
-     * @SuppressWarnings("unchecked") 忽略类型转换警告
+     * @return
      */
     @SuppressWarnings("unchecked")
     public void del(String... key) {
@@ -78,7 +80,7 @@ public class RedisUtil {
             if (key.length == 1) {
                 redisTemplate.delete(key[0]);
             } else {
-//                传入一个 Collection<String> 集合
+                // 传入一个 Collection<String> 集合
                 redisTemplate.delete(CollectionUtils.arrayToList(key));
             }
         }
@@ -177,7 +179,7 @@ public class RedisUtil {
     }
 
     /**
-     * 获取 key 对应的 map
+     * 获取 hashkey 对应的 map
      *
      * @param key 键（no null）
      * @return 对应的多个键值
@@ -208,7 +210,7 @@ public class RedisUtil {
      *
      * @param key  键
      * @param map  值
-     * @param time 时间
+     * @param time 时间(秒)
      * @return true / false
      */
     public boolean hmset(String key, Map<Object, Object> map, long time) {
@@ -269,6 +271,7 @@ public class RedisUtil {
      *
      * @param key  键
      * @param item 项（可以多个，no null）
+     * @return
      */
     public void hdel(String key, Object... item) {
         redisTemplate.opsForHash().delete(key, item);
@@ -302,7 +305,7 @@ public class RedisUtil {
      *
      * @param key  键
      * @param item 项
-     * @param by   递减大小
+     * @param by   递减大小 < 0
      * @return
      */
     public Double hdecr(String key, String item, Double by) {
