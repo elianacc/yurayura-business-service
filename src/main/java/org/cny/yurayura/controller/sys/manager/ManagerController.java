@@ -46,7 +46,7 @@ public class ManagerController {
      * @param id
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/getById")
+    @GetMapping("/getById")
     @ApiOperation("查询系统管理员（根据id）")
     @ApiImplicitParam(name = "id", value = "id", required = true, defaultValue = "1", dataType = "int")
     public ApiResult getById(Integer id) {
@@ -185,7 +185,7 @@ public class ManagerController {
      * @param
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     @ApiOperation("系统管理员注销")
     public ApiResult logout() {
         Subject subject = SecurityUtils.getSubject();
@@ -199,7 +199,7 @@ public class ManagerController {
      * @param
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/judgeAuthen")
+    @GetMapping("/judgeAuthen")
     @ApiOperation("判断系统管理员认证状态")
     public ApiResult judgeAuthen() {
         Subject subject = SecurityUtils.getSubject();

@@ -9,10 +9,7 @@ import org.cny.yurayura.system.annotation.PreventRepeatSubmit;
 import org.cny.yurayura.vo.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
@@ -35,7 +32,7 @@ public class MenuController {
      * @param id
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/getById")
+    @GetMapping("/getById")
     @ApiOperation("查询系统菜单（根据id）")
     @ApiImplicitParam(name = "id", value = "id", required = true, defaultValue = "1", dataType = "int")
     public ApiResult getById(Integer id) {
@@ -51,7 +48,7 @@ public class MenuController {
      * @param
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/getSysMenu")
+    @GetMapping("/getSysMenu")
     @ApiIgnore
     public ApiResult getSysMenu() {
         return iMenuService.getList();
@@ -63,7 +60,7 @@ public class MenuController {
      * @param
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/getList")
+    @GetMapping("/getList")
     @ApiOperation("查询系统菜单列表")
     public ApiResult getList() {
         return iMenuService.getList();
@@ -97,7 +94,7 @@ public class MenuController {
      * @param id
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/deleteById")
+    @GetMapping("/deleteById")
     @ApiOperation("删除系统菜单（根据id）")
     @ApiImplicitParam(name = "id", value = "id", required = true, defaultValue = "1", dataType = "int")
     public ApiResult delete(Integer id) {

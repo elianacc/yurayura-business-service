@@ -4,13 +4,10 @@ import io.swagger.annotations.*;
 import org.cny.yurayura.entity.sys.menu.MenuSub;
 import org.cny.yurayura.system.annotation.PreventRepeatSubmit;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.cny.yurayura.service.sys.menu.IMenuSubService;
 import org.cny.yurayura.vo.ApiResult;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 系统子菜单 controller
@@ -32,7 +29,7 @@ public class MenuSubController {
      * @param id
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/getById")
+    @GetMapping("/getById")
     @ApiOperation("查询系统子菜单（根据id）")
     @ApiImplicitParam(name = "id", value = "id", required = true, defaultValue = "1", dataType = "int")
     public ApiResult getById(Integer id) {
@@ -74,7 +71,7 @@ public class MenuSubController {
      * @param id
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/deleteById")
+    @GetMapping("/deleteById")
     @ApiOperation("删除系统子菜单（根据id）")
     @ApiImplicitParam(name = "id", value = "id", required = true, defaultValue = "1", dataType = "int")
     public ApiResult deleteById(Integer id) {
@@ -118,7 +115,7 @@ public class MenuSubController {
      * @param index
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/getByIndex")
+    @GetMapping("/getByIndex")
     @ApiOperation("查询系统子菜单（根据路径）")
     public ApiResult getByIndex(String index) {
         if (StringUtils.isEmpty(index)) {

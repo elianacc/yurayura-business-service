@@ -1,13 +1,15 @@
 package org.cny.yurayura.controller.comic;
 
 
-import io.swagger.annotations.*;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.cny.yurayura.service.comic.IComicUserDataService;
 import org.cny.yurayura.vo.ApiResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,7 +32,7 @@ public class ComicUserDataController {
      * @param id
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/getById")
+    @GetMapping("/getById")
     @ApiOperation("查询番剧用户数据（根据id）")
     @ApiImplicitParam(name = "id", value = "id", required = true, defaultValue = "1", dataType = "int")
     public ApiResult getById(Integer id) {

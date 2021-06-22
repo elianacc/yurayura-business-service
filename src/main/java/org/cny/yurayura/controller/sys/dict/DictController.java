@@ -33,7 +33,7 @@ public class DictController {
      * @param id
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/getById")
+    @GetMapping("/getById")
     @ApiOperation("查询系统数据字典（根据id）")
     @ApiImplicitParam(name = "id", value = "id", required = true, defaultValue = "1", dataType = "int")
     public ApiResult getById(Integer id) {
@@ -132,7 +132,7 @@ public class DictController {
      * @param dictCode
      * @return org.cny.yurayura.vo.ApiResult
      */
-    @PostMapping("/getByDictCode")
+    @GetMapping("/getByDictCode")
     @ApiOperation("查询系统数据字典（根据字典编码）")
     @ApiImplicitParam(name = "dictCode", value = "字典编码", required = true)
     public ApiResult getByDictCode(String dictCode) {
